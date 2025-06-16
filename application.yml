@@ -28,8 +28,6 @@
             max-age: '3600'
             allowed-origins: '*'
 
-server:
-  port: 8090
 
 ---
 spring:
