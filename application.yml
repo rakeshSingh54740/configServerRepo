@@ -37,6 +37,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/abms_local_dev
+
 server:
   port: 8091
   servlet:
@@ -56,6 +57,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/abms_local_dev
+
 server:
   port: 8093
 
@@ -73,13 +75,14 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/abms_local_dev
+
 server:
   port: 8092
 
 ---
 
 # ==========================
-# 🔐 Auth Service (Dev) – optional if present
+# 🔐 Auth Service (Dev)
 # ==========================
 spring:
   config:
@@ -87,6 +90,7 @@ spring:
       on-profile: auth-dev
   application:
     name: auth-service
+
 server:
   port: 8094
 
@@ -130,25 +134,27 @@ spring:
             allowedMethods: GET, POST, PUT, DELETE
             max-age: '3600'
             allowed-origins: '*'
+
 server:
   port: 8090
 
 ---
 
 # ==========================
-# 🧰 Utility Config
+# 🧰 Utility Config (Dev)
 # ==========================
 spring:
   config:
     activate:
       on-profile: utility-dev
-supportContactEmail: support@nitsolution.in
-supportTeamName: NIT
-spring:
   mvc:
     throw-exception-if-no-handler-found: true
   web:
     resources:
       add-mappings: false
+
 server:
   port: 8095
+
+supportContactEmail: support@nitsolution.in
+supportTeamName: NIT
