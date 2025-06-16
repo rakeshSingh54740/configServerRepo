@@ -1,40 +1,106 @@
- cloud:
-    gateway:
-      httpclient:
-        ssl:
-          useInsecureTrustManager: false
-      routes:
-        - id: Clinic-Service
-          uri: http://localhost:8091
-          predicates:
-            - Path=/clinic/**
-        - id: Auth-Service
-          uri: http://localhost:8094
-          predicates:
-            - Path=/auth/**
-        - id: Patient-Service
-          uri: http://localhost:8092
-          predicates:
-            - Path=/patient/**
-        - id: Notification-Service
-          uri: http://localhost:8093
-          predicates:
-            - Path=/notification/**
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowed-headers: '*'
-            allowedMethods: GET, POST, PUT, DELETE
-            max-age: '3600'
-            allowed-origins: '*'
+# ==========================
+# 🌍 Common Configuration
+# ==========================
+spring:
+  mail:
+    host: smtp.hostinger.com
+    port: 465
+    username: debanjan@nitsolution.in
+    password: Deb@2021
+    name: ABMS
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/abms_local_dev
+
+logging:
+  level:
+    root: INFO
 
 ---
+
+# ==========================
+# 🏥 Clinic Service (Dev)
+# ==========================
 spring:
   config:
     activate:
-      on-profile: prod
+      on-profile: clinic-dev
+  application:
+    name: clinic-service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/abms_local_dev
+server:
+  port: 8091
+  servlet:
+    context-path: /clinic
 
+---
+
+# ==========================
+# 🔔 Notification Service (Dev)
+# ==========================
+spring:
+  config:
+    activate:
+      on-profile: notification-dev
+  application:
+    name: notification-service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/abms_local_dev
+server:
+  port: 8093
+
+---
+
+# ==========================
+# 👤 Patient Service (Dev)
+# ==========================
+spring:
+  config:
+    activate:
+      on-profile: patient-dev
+  application:
+    name: patient-service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/abms_local_dev
+server:
+  port: 8092
+
+---
+
+# ==========================
+# 🔐 Auth Service (Dev) – optional if present
+# ==========================
+spring:
+  config:
+    activate:
+      on-profile: auth-dev
+  application:
+    name: auth-service
+server:
+  port: 8094
+
+---
+
+# ==========================
+# ⚙️ API Gateway (Dev)
+# ==========================
+spring:
+  config:
+    activate:
+      on-profile: apigateway-dev
+  application:
+    name: api-gateway
   cloud:
     gateway:
       httpclient:
@@ -45,14 +111,18 @@ spring:
           uri: http://localhost:8091
           predicates:
             - Path=/clinic/**
-        - id: Patient-Service
-          uri: http://localhost:8092
-          predicates:
-            - Path=/patient/**
         - id: Notification-Service
           uri: http://localhost:8093
           predicates:
             - Path=/notification/**
+        - id: Patient-Service
+          uri: http://localhost:8092
+          predicates:
+            - Path=/patient/**
+        - id: Auth-Service
+          uri: http://localhost:8094
+          predicates:
+            - Path=/auth/**
       globalcors:
         corsConfigurations:
           '[/**]':
@@ -60,3 +130,25 @@ spring:
             allowedMethods: GET, POST, PUT, DELETE
             max-age: '3600'
             allowed-origins: '*'
+server:
+  port: 8090
+
+---
+
+# ==========================
+# 🧰 Utility Config
+# ==========================
+spring:
+  config:
+    activate:
+      on-profile: utility-dev
+supportContactEmail: support@nitsolution.in
+supportTeamName: NIT
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+server:
+  port: 8095
