@@ -43,6 +43,8 @@ server:
   servlet:
     context-path: /clinic
 
+interfaceId: com-abms-clinic
+
 ---
 
 # ==========================
