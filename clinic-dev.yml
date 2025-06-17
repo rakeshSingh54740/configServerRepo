@@ -4,7 +4,7 @@ spring:
     activate:
       on-profile: clinic-dev
   application:
-    name: clinic-service
+    name: clinic
   data:
     mongodb:
       uri: mongodb://localhost:27017/abms_local_dev
@@ -14,6 +14,5 @@ server:
   servlet:
     context-path: /clinic
 
-interfaceId: com-abms-clinic   # <- Added this
 custom:
   interfaceId: com-abms-clinic
