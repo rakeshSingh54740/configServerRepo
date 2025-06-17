@@ -1,1 +1,104 @@
-test.value: rakeshdev
+# application-dev.yml
+
+# 🏥 Clinic Service
+clinic:
+  spring:
+    config:
+      activate:
+        on-profile: clinic-dev
+    application:
+      name: clinic-service
+  server:
+    port: 8091
+    servlet:
+      context-path: /clinic
+
+# 🔔 Notification Service
+notification:
+  spring:
+    config:
+      activate:
+        on-profile: notification-dev
+    application:
+      name: notification-service
+  server:
+    port: 8093
+    servlet:
+      context-path: /notification
+  custom:
+    interfaceId: abms-notification
+
+# 👤 Patient Service
+patient:
+  spring:
+    config:
+      activate:
+        on-profile: patient-dev
+    application:
+      name: patient-service
+  server:
+    port: 8092
+
+# 🔐 Auth Service
+auth:
+  spring:
+    config:
+      activate:
+        on-profile: auth-dev
+    application:
+      name: auth-service
+  server:
+    port: 8094
+
+# ⚙️ API Gateway
+apigateway:
+  spring:
+    config:
+      activate:
+        on-profile: apigateway-dev
+    cloud:
+      gateway:
+        httpclient:
+          ssl:
+            useInsecureTrustManager: false
+        routes:
+          - id: Clinic-Service
+            uri: http://localhost:8091
+            predicates:
+              - Path=/clinic/**
+          - id: Notification-Service
+            uri: http://localhost:8093
+            predicates:
+              - Path=/notification/**
+          - id: Patient-Service
+            uri: http://localhost:8092
+            predicates:
+              - Path=/patient/**
+          - id: Auth-Service
+            uri: http://localhost:8094
+            predicates:
+              - Path=/auth/**
+        globalcors:
+          corsConfigurations:
+            '[/**]':
+              allowed-headers: '*'
+              allowedMethods: GET, POST, PUT, DELETE
+              max-age: '3600'
+              allowed-origins: '*'
+  server:
+    port: 8090
+
+# 🧰 Utility Service
+utility:
+  spring:
+    config:
+      activate:
+        on-profile: utility-dev
+    mvc:
+      throw-exception-if-no-handler-found: true
+    web:
+      resources:
+        add-mappings: false
+  server:
+    port: 8095
+
