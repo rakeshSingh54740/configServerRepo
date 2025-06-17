@@ -1,0 +1,37 @@
+# ⚙️ API Gateway
+apigateway:
+  spring:
+    config:
+      activate:
+        on-profile: apigateway-dev
+    cloud:
+      gateway:
+        httpclient:
+          ssl:
+            useInsecureTrustManager: false
+        routes:
+          - id: Clinic-Service
+            uri: http://localhost:8091
+            predicates:
+              - Path=/clinic/**
+          - id: Notification-Service
+            uri: http://localhost:8093
+            predicates:
+              - Path=/notification/**
+          - id: Patient-Service
+            uri: http://localhost:8092
+            predicates:
+              - Path=/patient/**
+          - id: Auth-Service
+            uri: http://localhost:8094
+            predicates:
+              - Path=/auth/**
+        globalcors:
+          corsConfigurations:
+            '[/**]':
+              allowed-headers: '*'
+              allowedMethods: GET, POST, PUT, DELETE
+              max-age: '3600'
+              allowed-origins: '*'
+  server:
+    port: 8090
