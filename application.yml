@@ -29,11 +29,6 @@ logging:
 # 🏥 Clinic Service (Dev)
 # ==========================
 spring:
-  config:
-    activate:
-      on-profile: clinic-dev
-  application:
-    name: clinic-service
   data:
     mongodb:
       uri: mongodb://localhost:27017/abms_local_dev
@@ -43,7 +38,7 @@ server:
   servlet:
     context-path: /clinic
 
-interfaceId: com-abms-clinic
+
 
 ---
 
@@ -105,8 +100,6 @@ spring:
   config:
     activate:
       on-profile: apigateway-dev
-  application:
-    name: api-gateway
   cloud:
     gateway:
       httpclient:
