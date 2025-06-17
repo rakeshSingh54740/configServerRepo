@@ -1,1 +1,11 @@
+# 🔐 Auth Service
+auth:
+  spring:
+    config:
+      activate:
+        on-profile: auth-dev
+    application:
+      name: auth-service
+  server:
+    port: 8094
 
