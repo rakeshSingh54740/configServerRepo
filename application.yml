@@ -62,7 +62,7 @@ spring:
 
 server:
   port: 8093
-interfaceId: com-abms-notification
+interfaceId: abms-notification
 ---
 
 # ==========================
@@ -160,4 +160,4 @@ server:
 
 supportContactEmail: support@nitsolution.in
 supportTeamName: NIT
-interfaceId: com-abms-utility
+
