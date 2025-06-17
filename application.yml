@@ -24,7 +24,10 @@ spring:
           auth: true
           starttls:
             enable: true
-
+server:
+  port: 8093
+  servlet:
+    context-path: /notification
 logging:
   level:
     root: INFO
