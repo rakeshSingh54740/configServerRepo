@@ -1,0 +1,10 @@
+# 👤 Patient Service
+patient:
+  spring:
+    config:
+      activate:
+        on-profile: patient-dev
+    application:
+      name: patient-service
+  server:
+    port: 8092
