@@ -1,13 +1,17 @@
-notification:
-  spring:
-    config:
-      activate:
-        on-profile: notification-dev
-    application:
-      name: notification-service
-  server:
-    port: 8093
-    servlet:
-      context-path: /notification
-  custom:
-    interfaceId: abms-notification
+spring:
+  config:
+    activate:
+      on-profile: notification-dev
+  application:
+    name: notification
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/abms_local_dev
+
+server:
+  port: 8093
+  servlet:
+    context-path: /notification
+
+custom:
+  interfaceId: abms-notification
