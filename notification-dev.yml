@@ -1,0 +1,13 @@
+notification:
+  spring:
+    config:
+      activate:
+        on-profile: notification-dev
+    application:
+      name: notification-service
+  server:
+    port: 8093
+    servlet:
+      context-path: /notification
+  custom:
+    interfaceId: abms-notification
